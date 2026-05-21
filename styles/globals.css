@@ -15,16 +15,12 @@
   --font-display: var(--font-display);
 }
 
-
-
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #ededed;
     --foreground: #171717;
   }
 }
-
-
 
 body {
   background: var(--background);
@@ -41,4 +37,13 @@ h5,
 h6 {
   font-family: var(--font-display);
   font-weight: 700;
+}
+
+.hero-overlay {
+  background: linear-gradient(
+    to right,
+    #4b0a2db3 0%,
+    #4b0a2d40 70%,
+    transparent 100%
+  );
 }

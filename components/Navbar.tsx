@@ -1,29 +1,58 @@
-import Button from "./Button";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
-const Navlinks = [
-  { Label: "Pathways", href: "#" },
-  { Label: "For Business", href: "#" },
-  { Label: "Free Cohort", href: "#" },
-  { Label: "Marketplace", href: "#" },
+const navlinks = [
+  { Label: "Pathways", href: "#pathways" },
+  { Label: "For Business", href: "#business" },
+  { Label: "Free Cohort", href: "#cohort" },
+  { Label: "Marketplace", href: "#marketplace" },
 ];
 
 export default function Navbar() {
-  return (
-    <nav className="flex justify-between items-center p-6 ">
-      
-        <p className="font-bold text-2xl text-[#53093a]" >
-            Ascendency  <sup className="text-[10px] text-gray-500 font-light ">by Because She Can</sup>
-        </p>
+  const [scrolled, setScrolled] = useState(false);
 
-      
-      <div className="flex  gap-8">
-        {Navlinks.map((link, index) => (
-        <a key={index} href={link.href} className="text-sm text-[#745168]">
-          {link.Label}
-        </a>
-      ))}
-      </div>
-      <Button/>
-    </nav>
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <header
+      className={`fixed left-0 right-0 z-50 bg-white duration-300 ${scrolled ? "top-0" : "top-12.5"}`}
+    >
+      <nav className="max-w-7xl max-auto px-6 h-16 flex items-center justify-between">
+        <Link href="/" className="flex items-baseline gap-2">
+          <span className="text-[#53093a] font-bold text-2xl tracking-tight">
+            Ascendency
+          </span>
+          <span className="text-gray-400 text-xs font-normal">
+            by Because She Can
+          </span>
+        </Link>
+
+        <ul className="md:flex items-center gap-8">
+          {navlinks.map((link) => (
+            <li key={link.Label}>
+              <Link
+                href={link.href}
+                className="text-[#370627b3] text-sm font-medium hover:text-[#cd0e34] transition-colors"
+              >
+                {link.Label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <Link
+          href="/auth"
+          className="bg-[#cd0e34] text-white text-sm font-semibold px-5 py-3 rounded hover:bg-[#a80b2a] transition-colors"
+        >
+          Sign In
+        </Link>
+      </nav>
+    </header>
   );
 }

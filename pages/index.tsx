@@ -1,4 +1,5 @@
 import AnnouncementBar from "@/components/Announcementbar";
+import HeroSection from "@/components/HeroSection";
 import Navbar from "@/components/Navbar";
 
 export default function Home() {
@@ -6,7 +7,14 @@ export default function Home() {
     <>
       {/*Announcemnet Bar-scroll away natrually*/}
       <AnnouncementBar />
-      <Navbar/>
+      <Navbar />
+      {/* NAvbar -fixed
+offset=announcent = 40px +64px =104
+ */}
+
+      <div className="pt-16">
+        <HeroSection />
+      </div>
     </>
   );
 }
